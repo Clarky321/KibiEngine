@@ -5,6 +5,7 @@ project(KibiEngineEditor LANGUAGES CXX)
 # Исполняемый файл
 add_executable(${PROJECT_NAME}
     src/main.cpp
+	#src/main.c
 )
 
 # Линковка с ядром
