@@ -1,3 +1,14 @@
+#include <KibiEngineCore\game.h>
+
+int main()
+{
+	KibiEngine::Game game;
+	game.Run();
+
+	return 0;
+}
+
+/*
 #include <raylib.h>
 #include <raymath.h>
 #include <rlgl.h>
@@ -30,6 +41,7 @@ public:
 
 class World {
 private:
+
 	std::vector<std::vector<Block>> grid;
 	Texture2D blockTexture;
 
@@ -200,7 +212,6 @@ void DrawCubeTexture(Texture2D texture, Vector3 position, float width, float hei
 	rlSetTexture(0);
 }
 
-// Draw cube with texture piece applied to all faces
 void DrawCubeTextureRec(Texture2D texture, Rectangle source, Vector3 position, float width, float height, float length, Color color)
 {
 	float x = position.x;
@@ -213,7 +224,7 @@ void DrawCubeTextureRec(Texture2D texture, Rectangle source, Vector3 position, f
 	rlSetTexture(texture.id);
 
 	// We calculate the normalized texture coordinates for the desired texture-source-rectangle
-	// It means converting from (tex.width, tex.height) coordinates to [0.0f, 1.0f] equivalent 
+	// It means converting from (tex.width, tex.height) coordinates to [0.0f, 1.0f] equivalent
 	rlBegin(RL_QUADS);
 	rlColor4ub(color.r, color.g, color.b, color.a);
 
@@ -287,6 +298,7 @@ void DrawCubeTextureRec(Texture2D texture, Rectangle source, Vector3 position, f
 
 	rlSetTexture(0);
 }
+*/
 
 /*
 #include "raylib.h"
