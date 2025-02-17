@@ -3,12 +3,14 @@ cmake_minimum_required(VERSION 3.15)
 project(KibiEngineCore LANGUAGES CXX)
 
 # Исходные файлы
-set(ENGINE_HEADERS
-    includes/KibiEngineCore/test.h
+file(GLOB_RECURSE ENGINE_SOURCES
+    "src/*.cpp"
+    "src/*.c"
 )
 
-set(ENGINE_SOURCES
-    src/KibiEngineCore/test.cpp
+file(GLOB_RECURSE ENGINE_HEADERS
+    "includes/*.h"
+    "includes/*.hpp"
 )
 
 # Создание статической библиотеки
