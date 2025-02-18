@@ -1,28 +1,3 @@
-/*
-#pragma once
-#include <raylib.h>
-#include <KibiEngineCore\block.h>
-#include <KibiEngineCore\world.h>
-
-namespace KibiEngine {
-    class Character {
-    public:
-        Character(Vector3 position);
-        void Update(World& world);
-        void Draw() const;
-        Vector3 GetPosition() const;
-
-    private:
-        Vector3 m_position;
-        Block m_lowerBlock;
-        Block m_upperBlock;
-        float m_moveSpeed = 0.2f;
-
-        bool CheckCollision(const World& world, Vector3 newPos) const;
-    };
-}
-*/
-
 #pragma once
 
 #include <raylib.h>

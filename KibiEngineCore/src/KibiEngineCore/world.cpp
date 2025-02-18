@@ -28,15 +28,19 @@ namespace KibiEngine
             for (const auto& block : row)
             {
                 block->Draw();
+
+                // Рисуем рамку для отладки
+                DrawCubeWires(block->GetPosition(), 1.0f, 1.0f, 1.0f, LIGHTGRAY);
             }
         }
     }
 
-    bool World::HasSolidBlockAt(int x, int y, int z) const {
+    bool World::HasSolidBlockAt(int x, int y, int z) const
+    {
         if (x < 0 || x >= m_grid.size() || z < 0 || z >= m_grid[0].size())
             return true;
 
-        // Теперь метод GetPosition() доступен
-        return (m_grid[x][z]->GetPosition().y <= y);
+        // Проверяем высоту блока в конкретной ячейке
+        return (m_grid[x][z]->GetPosition().y >= y);
     }
 }

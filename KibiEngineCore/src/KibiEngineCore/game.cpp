@@ -14,7 +14,7 @@ namespace KibiEngine
 
     void Game::Initialize()
     {
-        InitWindow(m_screenWidth, m_screenHeight, "KibiEngine Demo");
+        InitWindow(m_screenWidth, m_screenHeight, "KibiEngine");
         SetTargetFPS(60);
         
         DisableCursor();
@@ -25,16 +25,12 @@ namespace KibiEngine
 
         m_character = std::make_unique<Character>(Vector3{ 10.0f, 1.0f, 10.0f });
 
-        //m_cameraController = std::make_unique<CameraController>(
-        //    Vector3{ 10.0f, 2.0f, 10.0f }, 0.1f, 0.005f
-        //);
-
         m_cameraController = std::make_unique<CameraController>(*m_character);
     }
 
     void Game::Shutdown()
     {
-        //UnloadTexture(m_blockTexture);
+        UnloadTexture(m_blockTexture);
         ResourceManager::UnloadAll();
         CloseWindow();
     }

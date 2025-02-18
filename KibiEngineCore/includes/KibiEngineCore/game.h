@@ -20,7 +20,7 @@ namespace KibiEngine
 
 		const int m_screenWidth = 1280;
 		const int m_screenHeight = 720;
-		const int m_worldSize = 20;
+		const int m_worldSize = 30;
 
 		std::unique_ptr<World> m_world;
 
