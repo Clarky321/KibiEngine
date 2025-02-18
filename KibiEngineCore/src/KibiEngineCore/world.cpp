@@ -1,5 +1,6 @@
-#include <KibiEngineCore\world.h>
 #include <memory>
+
+#include <KibiEngineCore\world.h>
 
 namespace KibiEngine
 {
@@ -29,5 +30,13 @@ namespace KibiEngine
                 block->Draw();
             }
         }
+    }
+
+    bool World::HasSolidBlockAt(int x, int y, int z) const {
+        if (x < 0 || x >= m_grid.size() || z < 0 || z >= m_grid[0].size())
+            return true;
+
+        // Теперь метод GetPosition() доступен
+        return (m_grid[x][z]->GetPosition().y <= y);
     }
 }

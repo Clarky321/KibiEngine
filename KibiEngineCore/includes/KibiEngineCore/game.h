@@ -3,6 +3,7 @@
 #include <memory>
 
 #include <KibiEngineCore\world.h>
+#include <KibiEngineCore\character.h>
 #include <KibiEngineCore\camera_controller.h>
 
 namespace KibiEngine
@@ -22,6 +23,9 @@ namespace KibiEngine
 		const int m_worldSize = 20;
 
 		std::unique_ptr<World> m_world;
+
+		std::unique_ptr<Character> m_character;
+
 		std::unique_ptr<CameraController> m_cameraController;
 		Texture2D m_blockTexture;
 	};

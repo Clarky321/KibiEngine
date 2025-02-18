@@ -3,6 +3,45 @@
 
 namespace KibiEngine
 {
+    CameraController::CameraController(const Character& character) :
+        m_character(character)
+    {
+        m_camera.position = { 0.0f, 20.0f, 10.0f };
+        m_camera.target = { 0.0f, 0.0f, 0.0f };
+        m_camera.up = { 0.0f, 1.0f, 0.0f };
+        m_camera.fovy = 15.0f;
+        m_camera.projection = CAMERA_ORTHOGRAPHIC;
+    }
+
+    void CameraController::Update()
+    {
+        UpdateIsometricView();
+    }
+
+    void CameraController::UpdateIsometricView()
+    {
+        Vector3 playerPos = m_character.GetPosition();
+
+        // Изометрическая проекция с углом 45 градусов
+        m_camera.position = Vector3Add(playerPos, { 10.0f, 10.0f, 10.0f });
+        m_camera.target = playerPos;
+
+        // Фиксируем поворот камеры
+        m_camera.up = { 0.0f, 1.0f, 0.0f };
+    }
+
+    Camera3D CameraController::GetCamera() const
+    {
+        return m_camera;
+    }
+}
+
+/*
+#include <KibiEngineCore\camera_controller.h>
+#include <raymath.h>
+
+namespace KibiEngine
+{
     CameraController::CameraController(Vector3 position, float speed, float sensitivity)
         : m_movementSpeed(speed), m_mouseSensitivity(sensitivity)
     {
@@ -38,3 +77,4 @@ namespace KibiEngine
         m_camera.target = Vector3Add(m_camera.position, forward);
     }
 }
+*/

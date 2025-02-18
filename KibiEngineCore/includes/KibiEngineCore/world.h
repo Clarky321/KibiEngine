@@ -12,6 +12,8 @@ namespace KibiEngine
 		World(int size, Texture2D texture);
 		void Draw() const;
 
+		bool HasSolidBlockAt(int x, int y, int z) const;
+
 	private:
 		std::vector<std::vector<std::unique_ptr<Block>>> m_grid;
 		Texture2D m_blockTexture;
