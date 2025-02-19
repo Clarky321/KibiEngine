@@ -18,8 +18,8 @@ namespace KibiEngine
 		void Initialize();
 		void Shutdown();
 
-		const int m_screenWidth = 1920;
-		const int m_screenHeight = 1200;
+		const int m_screenWidth = 1366;
+		const int m_screenHeight = 768;
 		const int m_worldSize = 30;
 
 		std::unique_ptr<World> m_world;

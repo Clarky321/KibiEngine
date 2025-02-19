@@ -65,7 +65,6 @@ namespace KibiEngine
 
         for (auto& point : checkPoints)
         {
-            // Используем floor вместо round для правильного определения чанков
             int x = static_cast<int>(floorf(point.x));
             int z = static_cast<int>(floorf(point.z));
 

@@ -10,8 +10,8 @@ namespace KibiEngine
     class Character
     {
     public:
-        Character(Vector3 position); // конструктор - построить
-        ~Character();                // деструктор - уничтожить (освободить)
+        Character(Vector3 position);
+        ~Character();
 
         void Update(World& world);
         void Draw() const;
@@ -22,10 +22,8 @@ namespace KibiEngine
         Block m_lowerBlock;
         Block m_upperBlock;
 
-        // Используем ссылки вместо указателей? пока что
         const Texture2D& m_textureLower;
         const Texture2D& m_textureUpper;
-        //
 
         float m_moveSpeed = 0.2f;
 
