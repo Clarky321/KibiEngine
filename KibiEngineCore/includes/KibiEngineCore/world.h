@@ -9,7 +9,7 @@ namespace KibiEngine
 	class World
 	{
 	public:
-		World(int size, Texture2D texture);
+		World(int size, const Texture2D& texture);
 		void Draw() const;
 
 		bool HasSolidBlockAt(int x, int y, int z) const;

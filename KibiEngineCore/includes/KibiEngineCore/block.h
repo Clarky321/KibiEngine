@@ -8,7 +8,7 @@ namespace KibiEngine
 	{
 	public:
 		Block();
-		Block(Vector3 position, Texture2D texture);
+		Block(Vector3 position, const Texture2D& texture);
 		void Draw() const;
 
 		Vector3 GetPosition() const { return m_position; }

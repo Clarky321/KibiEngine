@@ -18,15 +18,12 @@ namespace KibiEngine
 		void Initialize();
 		void Shutdown();
 
-		const int m_screenWidth = 1280;
-		const int m_screenHeight = 720;
+		const int m_screenWidth = 1920;
+		const int m_screenHeight = 1200;
 		const int m_worldSize = 30;
 
 		std::unique_ptr<World> m_world;
-
 		std::unique_ptr<Character> m_character;
-
 		std::unique_ptr<CameraController> m_cameraController;
-		Texture2D m_blockTexture;
 	};
 }

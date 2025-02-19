@@ -4,7 +4,7 @@
 
 namespace KibiEngine
 {
-    World::World(int size, Texture2D texture) : m_blockTexture(texture)
+    World::World(int size, const Texture2D& texture) : m_blockTexture(texture)
     {
         m_grid.resize(size);
 

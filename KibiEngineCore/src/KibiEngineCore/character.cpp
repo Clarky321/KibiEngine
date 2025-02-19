@@ -5,8 +5,8 @@ namespace KibiEngine
 {
     Character::Character(Vector3 position) :
         m_position(position),
-        m_textureLower(&ResourceManager::LoadTexture("../../assets/tileset/orangewool.png")),
-        m_textureUpper(&ResourceManager::LoadTexture("../../assets/tileset/woolcoloredblue.png"))
+        m_textureLower(ResourceManager::LoadTexture("../../assets/tileset/orangewool.png")),
+        m_textureUpper(ResourceManager::LoadTexture("../../assets/tileset/woolcoloredblue.png"))
     {
         UpdateBlocksPosition();
     }
@@ -46,8 +46,8 @@ namespace KibiEngine
 
     void Character::UpdateBlocksPosition()
     {
-        m_lowerBlock = Block(m_position, *m_textureLower);
-        m_upperBlock = Block({ m_position.x, m_position.y + 1.0f, m_position.z }, *m_textureUpper);
+        m_lowerBlock = Block(m_position, m_textureLower);
+        m_upperBlock = Block({ m_position.x, m_position.y + 1.0f, m_position.z }, m_textureUpper);
     }
 
     void Character::Draw() const

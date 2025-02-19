@@ -16,21 +16,22 @@ namespace KibiEngine
     {
         InitWindow(m_screenWidth, m_screenHeight, "KibiEngine");
         SetTargetFPS(60);
-        
-        DisableCursor();
+        //DisableCursor();
 
-        m_blockTexture = LoadTexture("../../assets/tileset/dirt.png");
+        // Предзагрузка всех ресурсов
+        ResourceManager::PreloadAssets();
 
-        m_world = std::make_unique<World>(m_worldSize, m_blockTexture);
+        // Получаем ссылку на текстуру через менеджер
+        const Texture2D& blockTexture = ResourceManager::LoadTexture("../../assets/tileset/dirt.png");
 
+        m_world = std::make_unique<World>(m_worldSize, blockTexture);
         m_character = std::make_unique<Character>(Vector3{ 10.0f, 1.0f, 10.0f });
-
         m_cameraController = std::make_unique<CameraController>(*m_character);
     }
 
     void Game::Shutdown()
     {
-        UnloadTexture(m_blockTexture);
+        // Удаляем все текстуры
         ResourceManager::UnloadAll();
         CloseWindow();
     }
