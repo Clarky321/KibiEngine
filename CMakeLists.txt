@@ -5,10 +5,19 @@ project(KibiEngine LANGUAGES C CXX)
 # Общие настройки
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_C_STANDARD 11)  # Raylib требует C11
+set(CMAKE_C_STANDARD 11)
+
+include(FetchContent)
+
+FetchContent_Declare(
+    entt
+    GIT_REPOSITORY https://github.com/skypjack/entt.git
+    GIT_TAG v3.14.0
+)
+FetchContent_MakeAvailable(entt)  # Только для EnTT
 
 # Настройка raylib через FetchContent
-include(FetchContent)
+
 FetchContent_Declare(
     raylib
     GIT_REPOSITORY https://github.com/raysan5/raylib.git

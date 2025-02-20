@@ -1,5 +1,33 @@
 #pragma once
 
+#include <entt\entt.hpp>
+
+#include <KibiEngineCore\world.h>
+
+#include <KibiEngineCore\ecs\systems\movement_system.h>
+#include <KibiEngineCore\ecs\systems\rendering_system.h>
+#include <KibiEngineCore\ecs\systems\camera_system.h>
+
+namespace KibiEngine
+{
+	class Game
+	{
+	public:
+		Game();
+		void Run();
+
+	private:
+		World world;
+
+		ECS::MovementSystem movementSystem;
+		ECS::RenderingSystem renderingSystem;
+		ECS::CameraSystem cameraSystem;
+	};
+}
+
+/*
+#pragma once
+
 #include <memory>
 
 #include <KibiEngineCore\world.h>
@@ -27,3 +55,4 @@ namespace KibiEngine
 		std::unique_ptr<CameraController> m_cameraController;
 	};
 }
+*/

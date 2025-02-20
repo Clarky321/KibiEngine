@@ -24,6 +24,7 @@ target_include_directories(${PROJECT_NAME}
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/includes>
         $<INSTALL_INTERFACE:includes>
+		${entt_SOURCE_DIR}/src
     PRIVATE
         src
 )

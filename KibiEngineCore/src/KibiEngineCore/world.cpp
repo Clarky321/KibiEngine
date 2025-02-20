@@ -1,3 +1,62 @@
+#include <KibiEngineCore\world.h>
+
+namespace KibiEngine {
+    World::World(int size, const Texture2D& texture) : blockTexture(texture)
+    {
+        for (int x = 0; x < size; ++x)
+        {
+            for (int z = 0; z < size; ++z)
+            {
+                auto entity = registry.create();
+
+                registry.emplace<ECS::Transform>(entity, Vector3{ (float)x, 0.0f, (float)z });
+                registry.emplace<ECS::Renderable>(entity, &blockTexture);
+            }
+        }
+    }
+
+    bool World::HasSolidBlockAt(int x, int y, int z) const
+    {
+        auto view = registry.view<ECS::Transform>();
+
+        for (auto entity : view)
+        {
+            auto& pos = view.get<ECS::Transform>(entity).position;
+
+            if (static_cast<int>(pos.x) == x &&
+                static_cast<int>(pos.z) == z &&
+                pos.y >= y)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+/*
+#include <KibiEngineCore\world.h>
+
+namespace KibiEngine
+{
+    World::World(int size, const Texture2D& texture)
+        : m_blockTexture(texture)
+    {
+        for (int x = 0; x < size; ++x)
+        {
+            for (int z = 0; z < size; ++z)
+            {
+                auto entity = m_registry.create();
+
+                m_registry.emplace<ECS::Transform>(entity, Vector3{ (float)x, 0.0f, (float)z });
+                m_registry.emplace<ECS::Renderable>(entity, &m_blockTexture);
+            }
+        }
+    }
+}
+*/
+
+/*
 #include <memory>
 
 #include <KibiEngineCore\world.h>
@@ -44,3 +103,4 @@ namespace KibiEngine
         return (m_grid[x][z]->GetPosition().y >= y);
     }
 }
+*/

@@ -2,6 +2,75 @@
 
 #include <KibiEngineCore\game.h>
 #include <KibiEngineCore\resource_manager.h>
+
+namespace KibiEngine
+{
+    Game::Game() : world(30, ResourceManager::LoadTexture("../../assets/tileset/dirt.png"))
+    {
+        // Создание игрока
+        auto player = world.GetRegistry().create();
+        world.GetRegistry().emplace<ECS::Transform>(player, Vector3{ 10.0f, 1.0f, 10.0f });
+        world.GetRegistry().emplace<ECS::PlayerController>(player);
+        world.GetRegistry().emplace<ECS::Renderable>(player, &ResourceManager::LoadTexture("../../assets/tileset/orangewool.png"));
+
+        // Настройка камеры
+        auto camera = world.GetRegistry().create();
+        world.GetRegistry().emplace<ECS::CameraComponent>(camera, Camera3D{ ... });
+    }
+
+
+    void Game::Run()
+    {
+        while (!WindowShouldClose())
+        {
+            movementSystem.Update(world.GetRegistry(), world);
+            cameraSystem.Update(world.GetRegistry());
+
+            BeginDrawing();
+            ClearBackground(SKYBLUE);
+
+            // Получаем камеру
+            auto& registry = world.GetRegistry();
+            auto cameraView = registry.view<ECS::CameraComponent>();
+            
+            cameraView.each([&](auto& cameraComp)
+                {
+                BeginMode3D(cameraComp.camera);
+                renderingSystem.Update(registry);
+                EndMode3D();
+                });
+
+            EndDrawing();
+        }
+    }
+}
+
+/*
+    void Game::Run()
+{
+    while (!WindowShouldClose())
+    {
+        m_movementSystem.Update(m_world.GetRegistry());
+        m_cameraSystem.Update(m_world.GetRegistry());
+
+        BeginDrawing();
+        ClearBackground(SKYBLUE);
+        BeginMode3D(...);
+
+        m_renderingSystem.Update(m_world.GetRegistry());
+
+        EndMode3D();
+        EndDrawing();
+    }
+}
+*/
+
+
+/*
+#include <raylib.h>
+
+#include <KibiEngineCore\game.h>
+#include <KibiEngineCore\resource_manager.h>
 #include <KibiEngineCore\world.h>
 #include <KibiEngineCore\camera_controller.h>
 
@@ -56,3 +125,4 @@ namespace KibiEngine
         }
     }
 }
+*/
