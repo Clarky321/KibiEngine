@@ -13,7 +13,7 @@ namespace KibiEngine
 
     Character::~Character()
     {
-        // –есурсы управл€ютс€ ResourceManager
+        // ResourceManager
     }
 
     void Character::Update(World& world)

@@ -3,7 +3,8 @@
 #include <raylib.h>
 #include <KibiEngineCore\character.h>
 
-namespace KibiEngine {
+namespace KibiEngine
+{
 	class CameraController
 	{
 	public:

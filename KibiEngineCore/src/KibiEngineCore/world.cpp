@@ -29,7 +29,6 @@ namespace KibiEngine
             {
                 block->Draw();
 
-                // Рисуем рамку для отладки
                 DrawCubeWires(block->GetPosition(), 1.0f, 1.0f, 1.0f, LIGHTGRAY);
             }
         }
@@ -40,7 +39,6 @@ namespace KibiEngine
         if (x < 0 || x >= m_grid.size() || z < 0 || z >= m_grid[0].size())
             return true;
 
-        // Проверяем высоту блока в конкретной ячейке
         return (m_grid[x][z]->GetPosition().y >= y);
     }
 }

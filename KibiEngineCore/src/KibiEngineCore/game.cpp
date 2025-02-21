@@ -20,10 +20,8 @@ namespace KibiEngine
 
         SetWindowState(FLAG_WINDOW_RESIZABLE);
 
-        // Предзагрузка всех ресурсов
         ResourceManager::PreloadAssets();
 
-        // Получаем ссылку на текстуру через менеджер
         const Texture2D& blockTexture = ResourceManager::LoadTexture("../../assets/tileset/dirt.png");
 
         m_world = std::make_unique<World>(m_worldSize, blockTexture);
@@ -33,7 +31,6 @@ namespace KibiEngine
 
     void Game::Shutdown()
     {
-        // Удаляем все текстуры
         ResourceManager::UnloadAll();
         CloseWindow();
     }

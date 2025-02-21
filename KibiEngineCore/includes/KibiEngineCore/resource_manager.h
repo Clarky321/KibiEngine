@@ -11,13 +11,8 @@ namespace KibiEngine
     class ResourceManager
     {
     public:
-        // Загрузка тестуры с автоматическим кэшированием
         static const Texture2D& LoadTexture(const std::string& path);
-
-        // Автоматическая предзагрузка всех необходимых ресурсов
         static void PreloadAssets();
-
-        // Выгрузка всех ресурсов
         static void UnloadAll();
 
     private:

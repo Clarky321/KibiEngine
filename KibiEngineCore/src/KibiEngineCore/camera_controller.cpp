@@ -22,11 +22,9 @@ namespace KibiEngine
     {
         Vector3 playerPos = m_character.GetPosition();
 
-        // Изометрическая проекция с правильным смещением
         m_camera.position = Vector3Add(playerPos, { 10.0f, 20.0f, 10.0f });
         m_camera.target = playerPos;
 
-        // Настройка проекции
         m_camera.fovy = 50.0f;
         m_camera.projection = CAMERA_PERSPECTIVE;
     }
