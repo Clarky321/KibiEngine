@@ -18,6 +18,8 @@ namespace KibiEngine
         SetTargetFPS(60);
         //DisableCursor();
 
+        SetWindowState(FLAG_WINDOW_RESIZABLE);
+
         // Предзагрузка всех ресурсов
         ResourceManager::PreloadAssets();
 
