@@ -12,7 +12,7 @@ add_executable(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE 
         KibiEngineCore
-        raylib  # Если редактор использует raylib напрямую
+        raylib
 )
 
 # Настройка выходной директории

@@ -28,7 +28,7 @@ namespace KibiEngine
         if (Vector3Length(moveDir) > 0)
         {
             moveDir = Vector3Normalize(moveDir);
-            Vector3 newPos = Vector3Add(m_position, Vector3Scale(moveDir, m_moveSpeed));
+            Vector3 newPos = Vector3Add(m_position, Vector3Scale(moveDir, m_moveSpeed * GetFrameTime()));
 
             if (!CheckCollision(world, newPos))
             {

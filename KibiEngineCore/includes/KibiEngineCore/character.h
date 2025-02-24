@@ -25,7 +25,7 @@ namespace KibiEngine
         const Texture2D& m_textureLower;
         const Texture2D& m_textureUpper;
 
-        float m_moveSpeed = 0.2f;
+        float m_moveSpeed = 8.0f;
 
         void UpdateBlocksPosition();
         bool CheckCollision(const World& world, Vector3 newPos) const;
