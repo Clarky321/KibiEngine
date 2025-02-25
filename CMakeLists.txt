@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 11)
 
 include(FetchContent)
+
 FetchContent_Declare(
     raylib
     GIT_REPOSITORY https://github.com/raysan5/raylib.git
@@ -15,11 +16,11 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(raylib)
 
+add_subdirectory(submodules)
+
 # Подпроекты
 add_subdirectory(KibiEngineCore)
 add_subdirectory(KibiEngineEditor)
-
-add_subdirectory(external)
 
 # Настройка стартового проекта для Visual Studio
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT KibiEngineEditor)

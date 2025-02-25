@@ -19,6 +19,13 @@ add_library(${PROJECT_NAME} STATIC
     ${ENGINE_HEADERS}
 )
 
+# Линковка с raylib
+target_link_libraries(${PROJECT_NAME} PRIVATE
+	raylib
+	rlImGui
+	imgui
+)
+
 # Настройка include-директорий
 target_include_directories(${PROJECT_NAME}
     PUBLIC
@@ -27,9 +34,6 @@ target_include_directories(${PROJECT_NAME}
     PRIVATE
         src
 )
-
-# Линковка с raylib
-target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
 # Группировка файлов в IDE
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} 
