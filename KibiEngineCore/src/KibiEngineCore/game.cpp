@@ -58,12 +58,15 @@ namespace KibiEngine
 */
 
 #include <raylib.h>
+#include <raymath.h>
 
 #include <KibiEngineCore\game.h>
 #include <KibiEngineCore\resource_manager.h>
 #include <KibiEngineCore\world.h>
 #include <KibiEngineCore\camera_controller.h>
-#include <raymath.h>
+#include <KibiEngineCore\GuiUI\UI.h>
+
+#include <rlImGui.h>
 
 namespace KibiEngine
 {
@@ -76,16 +79,19 @@ namespace KibiEngine
     {
         InitWindow(m_screenWidth, m_screenHeight, "KibiEngine");
         SetTargetFPS(60);
-
         SetWindowState(FLAG_WINDOW_RESIZABLE);
 
         ResourceManager::PreloadAssets();
+        
+        m_currentBlockTexture = ResourceManager::LoadTexture("../../assets/tileset/wood.png");
 
-        const Texture2D& blockTexture = ResourceManager::LoadTexture("../../assets/tileset/dirt.png");
+        m_world = std::make_unique<World>(m_worldSize, m_currentBlockTexture);
 
-        m_world = std::make_unique<World>(m_worldSize, blockTexture);
-        m_character = std::make_unique<Character>(Vector3{ 10.0f, 1.0f, 10.0f });
-        m_cameraController = std::make_unique<CameraController>(*m_character);
+        m_cameraController = std::make_unique<CameraController>(m_worldSize);
+
+        rlImGuiSetup(true);
+
+        UI::Initialize();
     }
 
     void Game::Shutdown()
@@ -98,31 +104,64 @@ namespace KibiEngine
     {
         while (!WindowShouldClose())
         {
-            m_character->Update(*m_world);
             m_cameraController->Update();
 
-            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-            {
-                Ray ray = GetMouseRay(GetMousePosition(), m_cameraController->GetCamera());
+            Ray ray = GetMouseRay(GetMousePosition(), m_cameraController->GetCamera());
+            RayCollision nearestCollision = { nearestCollision.hit = false };
 
-                RayCollision nearestCollision = { 0 };
-                for (const auto& [key, block] : m_world->GetBlocks())
+            // Поиск ближайшего блока
+            for (const auto& [key, block] : m_world->GetBlocks())
+            {
+                BoundingBox box = {
+                    box.min = Vector3Subtract(block->GetPosition(), {0.5f, 0.5f, 0.5f}),
+                    box.max = Vector3Add(block->GetPosition(), {0.5f, 0.5f, 0.5f})
+                };
+
+                RayCollision collision = GetRayCollisionBox(ray, box);
+                if (collision.hit && (!nearestCollision.hit || collision.distance < nearestCollision.distance))
                 {
-                    BoundingBox box = {
-                        block.min = Vector3Subtract(block->GetPosition(), {0.5f, 0.5f, 0.5f}),
-                        block.max = Vector3Add(block->GetPosition(), {0.5f, 0.5f, 0.5f})
-                    };
+                    nearestCollision = collision;
+                }
             }
 
+            // Добавление блока (ЛКМ)
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && nearestCollision.hit)
+            {
+
+                Vector3 newPos = Vector3Add(nearestCollision.point,
+                    Vector3Scale(nearestCollision.normal, 0.5f));
+                m_world->AddBlock(newPos, m_currentBlockTexture);
+            }
+
+            // Удаление блока (ПКМ)
+            if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON) && nearestCollision.hit)
+            {
+                m_world->RemoveBlock(nearestCollision.point);
+            }
+
+            // Отрисовка
             BeginDrawing();
             ClearBackground(SKYBLUE);
 
             BeginMode3D(m_cameraController->GetCamera());
+            m_world->Draw(m_showWireframe);
 
-            m_world->Draw();
-            m_character->Draw();
+            // Подсветка выбранного блока
+            if (nearestCollision.hit)
+            {
+                DrawCubeWiresV(
+                    Vector3Add(nearestCollision.point, nearestCollision.normal),
+                    { 0.9f, 0.9f, 0.9f },
+                    RED
+                );
+            }
 
             EndMode3D();
+
+            rlImGuiBegin();
+            UI::Draw(&m_currentBlockTexture, &m_showWireframe);
+            rlImGuiEnd();
+
             EndDrawing();
         }
     }

@@ -2,6 +2,8 @@
 // Created by nosquad on 12/30/2023.
 //
 
+#include <imgui.h>
+
 #ifndef BASE_RAYLIB_GAME_PROJECT_STYLES_H
 #define BASE_RAYLIB_GAME_PROJECT_STYLES_H
 void embraceTheDarkness()

@@ -15,6 +15,11 @@ namespace KibiEngine
         static void PreloadAssets();
         static void UnloadAll();
 
+        static const std::unordered_map<std::string, Texture2D>& GetTextures()
+        {
+            return m_textures;
+        }
+
     private:
         static std::unordered_map<std::string, Texture2D> m_textures;
         static std::vector<std::string> m_assetPaths;

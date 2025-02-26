@@ -1,13 +1,18 @@
-#include <KibiEngineCore\resource_manager.h>
 #include <stdexcept>
+
+#include <KibiEngineCore\resource_manager.h>
 
 namespace KibiEngine
 {
 	std::unordered_map<std::string, Texture2D> ResourceManager::m_textures;
-	std::vector<std::string> ResourceManager::m_assetPaths = {
+	std::vector<std::string> ResourceManager::m_assetPaths =
+	{
 		"../../assets/tileset/dirt.png",
 		"../../assets/tileset/orangewool.png",
-		"../../assets/tileset/woolcoloredblue.png"
+		"../../assets/tileset/woolcoloredblue.png",
+		"../../assets/tileset/sand.png",
+		"../../assets/tileset/wood.png"
+
 	};
 	std::mutex ResourceManager::m_mutex;
 

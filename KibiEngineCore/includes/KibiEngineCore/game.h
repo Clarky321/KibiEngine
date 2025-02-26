@@ -14,16 +14,20 @@ namespace KibiEngine
 		Game();
 		void Run();
 
+		Texture2D m_currentBlockTexture;
+
+		bool m_showWireframe = false;
+
 	private:
 		void Initialize();
 		void Shutdown();
 
 		const int m_screenWidth = 1366;
 		const int m_screenHeight = 768;
-		const int m_worldSize = 30;
+		const int m_worldSize = 60;
 
 		std::unique_ptr<World> m_world;
-		std::unique_ptr<Character> m_character;
+		//std::unique_ptr<Character> m_character;
 		std::unique_ptr<CameraController> m_cameraController;
 	};
 }
