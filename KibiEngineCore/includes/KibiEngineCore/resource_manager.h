@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <mutex>
+#include <KibiEngineCore\npc_models.h>
 
 namespace KibiEngine
 {
@@ -20,9 +21,18 @@ namespace KibiEngine
             return m_textures;
         }
 
+        //
+        static std::unordered_map<std::string, std::unique_ptr<VoxModel>> m_voxModels;
+        //
+
     private:
         static std::unordered_map<std::string, Texture2D> m_textures;
         static std::vector<std::string> m_assetPaths;
         static std::mutex m_mutex;
+
+        //
+        static const VoxModel* LoadVoxModel(const std::string& path);
+        static void UnloadVoxModels();
+        //
     };
 }

@@ -66,6 +66,7 @@ namespace KibiEngine
 #include <KibiEngineCore\camera_controller.h>
 #include <KibiEngineCore\GuiUI\UI.h>
 
+
 #include <rlImGui.h>
 
 namespace KibiEngine
@@ -89,8 +90,12 @@ namespace KibiEngine
 
         m_cameraController = std::make_unique<CameraController>(m_worldSize);
 
-        rlImGuiSetup(true);
+        // Загрузка модели персонажа
+        m_characterModel = std::make_unique<VoxModel>("../../assets/models/chr_knight.vox");
+        m_voxObjects.emplace_back(m_characterModel.get(), Vector3{ 5.0f, 1.0f, 5.0f }, 0.25f);
+        //
 
+        rlImGuiSetup(true);
         UI::Initialize();
     }
 
@@ -139,11 +144,36 @@ namespace KibiEngine
                 m_world->RemoveBlock(nearestCollision.point);
             }
 
+
             // Отрисовка
             BeginDrawing();
             ClearBackground(SKYBLUE);
 
+            // Проверка коллизий VoxObject с блоками
+            for (auto& voxObj : m_voxObjects)
+            {
+                BoundingBox voxBox = voxObj.GetBoundingBox();
+
+                for (const auto& [key, block] : m_world->GetBlocks())
+                {
+                    BoundingBox blockBox = {
+                        Vector3Subtract(block->GetPosition(), {0.5f, 0.5f, 0.5f}),
+                        Vector3Add(block->GetPosition(), {0.5f, 0.5f, 0.5f})
+                    };
+
+                    if (CheckCollisionBoxes(voxBox, blockBox))
+                    {
+                        // Обработка коллизии
+                    }
+                }
+            }
+
             BeginMode3D(m_cameraController->GetCamera());
+            for (const auto& voxObj : m_voxObjects)
+            {
+                voxObj.Draw();
+            }
+
             m_world->Draw(m_showWireframe);
 
             // Подсветка выбранного блока

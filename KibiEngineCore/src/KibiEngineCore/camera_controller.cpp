@@ -115,7 +115,7 @@ namespace KibiEngine {
     void CameraController::Update() {
         // Зум колёсиком
         m_distance -= GetMouseWheelMove() * m_zoomSpeed;
-        m_distance = Clamp(m_distance, 20.0f, 50.0f);
+        m_distance = Clamp(m_distance, 10.0f, 50.0f);
 
         // Управление перемещением камеры
         if (IsKeyDown(KEY_W)) m_focusPoint.z -= 0.5f;

@@ -1,6 +1,7 @@
 #include <stdexcept>
 
 #include <KibiEngineCore\resource_manager.h>
+#include <KibiEngineCore\npc_models.h>
 
 namespace KibiEngine
 {
@@ -52,4 +53,25 @@ namespace KibiEngine
 		}
 		m_textures.clear();
 	}
+
+	//
+	std::unordered_map<std::string, std::unique_ptr<VoxModel>> ResourceManager::m_voxModels;
+
+	const VoxModel* ResourceManager::LoadVoxModel(const std::string& path)
+	{
+		if (auto it = m_voxModels.find(path); it != m_voxModels.end())
+		{
+			return it->second.get();
+		}
+
+		auto model = std::make_unique<VoxModel>(path);
+		m_voxModels[path] = std::move(model);
+		return m_voxModels[path].get();
+	}
+
+	void ResourceManager::UnloadVoxModels()
+	{
+		m_voxModels.clear();
+	}
+	//
 }

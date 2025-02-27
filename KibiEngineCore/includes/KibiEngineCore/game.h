@@ -5,6 +5,7 @@
 #include <KibiEngineCore\world.h>
 #include <KibiEngineCore\character.h>
 #include <KibiEngineCore\camera_controller.h>
+#include "npc_models.h"
 
 namespace KibiEngine
 {
@@ -17,6 +18,11 @@ namespace KibiEngine
 		Texture2D m_currentBlockTexture;
 
 		bool m_showWireframe = false;
+
+		//
+		std::vector<VoxObject> m_voxObjects;
+		std::unique_ptr<VoxModel> m_characterModel;
+		//
 
 	private:
 		void Initialize();

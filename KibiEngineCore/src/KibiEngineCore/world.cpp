@@ -115,17 +115,6 @@ namespace KibiEngine
         return nullptr;
     }
 
-    /*
-        void World::Draw() const
-    {
-        for (const auto& [key, block] : m_blocks)
-        {
-            block->Draw();
-            DrawCubeWiresV(block->GetPosition(), { 1,1,1 }, LIGHTGRAY);
-        }
-    }
-    */
-
     void World::Draw(bool showWireframe) const
     {
         for (const auto& [key, block] : m_blocks)
